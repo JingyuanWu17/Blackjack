@@ -8,12 +8,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-// Manage card behavior
-public class PokerManager extends CardManager {
+// Manage poker cards behavior
+public class PokerManager implements CardManager {
 
     //Singleton Pattern
-    private PokerManager() {
-    }
+    private PokerManager() {}
 
     private static int deck = 1;
     private static boolean withJoker = false;
@@ -44,11 +43,13 @@ public class PokerManager extends CardManager {
         return cardPool.remove(cardPool.size() - 1);
     }
 
-    public void setDecks(int d) {
-        deck = d;
+    @Override
+    public void setDecks(int n) {
+        deck = n;
     }
 
-    public void setJoker(boolean bool) {
+    @Override
+    public void setJokers(boolean bool) {
         withJoker = bool;
     }
 }

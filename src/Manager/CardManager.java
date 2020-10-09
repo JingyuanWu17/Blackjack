@@ -2,10 +2,10 @@ package Manager;
 
 import Cards.Card;
 
-public abstract class CardManager {
-
-    public abstract void initCardPool();
-    public abstract void shuffle();
-    public abstract Card deal();
-
+public interface CardManager {
+    void initCardPool();
+    void shuffle();
+    Card deal();
+    void setDecks(int n);
+    void setJokers(boolean bool);
 }

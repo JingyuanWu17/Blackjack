@@ -5,7 +5,7 @@ import java.util.List;
 
 //One deck of poker cards
 public class PokerCards {
-    private static final String[] RANKS = {"2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "2"};
+    private static final String[] RANKS = {"2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"};
 
     //H -> Heart, S -> Spade, C -> Club, D -> Diamond
     private static final String[] SUITS = {"H", "S", "C", "D"};
