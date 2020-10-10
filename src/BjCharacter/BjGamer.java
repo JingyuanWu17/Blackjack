@@ -2,6 +2,7 @@ package BjCharacter;
 
 import java.util.List;
 import java.util.ArrayList;
+
 import Cards.Card;
 
 // Blackjack gamer
@@ -9,11 +10,10 @@ public abstract class BjGamer {
 
     public String name;
 
-    // Record cards
     protected final List<Card> handCards = new ArrayList<>();
 
-    //table[0]:scores without ace value
-    //table[1]:the count of ace
+    //table[0]:points without ace value
+    //table[1]:numbers of ace
     protected final int[] table = new int[2];
 
     //Decide next move, take one more card or not

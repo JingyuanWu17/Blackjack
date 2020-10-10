@@ -9,6 +9,7 @@ public class BjDealer extends BjGamer {
     public BjDealer(BjStrategy strategy) {
         name = "Dealer";
         this.strategy = strategy;
+        strategy.setGamer(this);
     }
 
     @Override
