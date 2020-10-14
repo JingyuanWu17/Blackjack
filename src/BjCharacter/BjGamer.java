@@ -19,7 +19,15 @@ public abstract class BjGamer {
     //Decide next move, take one more card or not
     public abstract boolean takeNext();
 
-    public abstract void printTwoCards();
+    public abstract void printFirstTwoCards();
+
+    public void printAllCards() {
+        System.out.print(name + " has: ");
+        for (Card card : handCards) {
+            System.out.print(card.getRank() + " ");
+        }
+        System.out.println();
+    }
 
     public void addCard(Card card) {
         handCards.add(card);
@@ -27,11 +35,11 @@ public abstract class BjGamer {
     }
 
     public boolean isBurst() {
-        return getScore() > 21;
+        return getPoints() > 21;
     }
 
-    //Calculate the sum of card values
-    public int getScore() {
+    //Calculate the sum of card points
+    public int getPoints() {
         int val = table[0];
         int n = table[1];
         while (n > 0) {

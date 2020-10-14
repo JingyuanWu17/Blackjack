@@ -9,22 +9,15 @@ public class BjDealer extends BjGamer {
     public BjDealer(BjStrategy strategy) {
         name = "Dealer";
         this.strategy = strategy;
-        strategy.setGamer(this);
     }
 
     @Override
     public boolean takeNext() {
-        return strategy.takeNext();
+        return strategy.takeNext(getPoints());
     }
 
     @Override
-    public void printTwoCards() {
+    public void printFirstTwoCards() {
         System.out.println("Dealer has one hidden card and one " + handCards.get(1).getRank());
-    }
-
-    @Override
-    public void addCard(Card card) {
-        super.addCard(card);
-        strategy.recordCard(card);
     }
 }

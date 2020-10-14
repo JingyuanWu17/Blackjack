@@ -17,6 +17,7 @@ public class PokerManager implements CardManager {
     private static int deck = 1;
     private static boolean withJoker = false;
     private static final List<Card> cardPool = new ArrayList<>();
+    private static final List<Card> cardLog = new ArrayList<>();
     private static final PokerManager pm = new PokerManager();
 
     public static PokerManager getInstance() {
@@ -40,7 +41,9 @@ public class PokerManager implements CardManager {
 
     @Override
     public Card deal() {
-        return cardPool.remove(cardPool.size() - 1);
+        Card card = cardPool.remove(cardPool.size() - 1);
+        cardLog.add(card);
+        return card;
     }
 
     @Override
@@ -51,5 +54,9 @@ public class PokerManager implements CardManager {
     @Override
     public void setJokers(boolean bool) {
         withJoker = bool;
+    }
+
+    public List<Card> getCardLog() {
+        return cardLog;
     }
 }

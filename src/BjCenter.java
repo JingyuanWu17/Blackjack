@@ -24,7 +24,7 @@ public class BjCenter {
 
         //Set the difficulty of game
         System.out.println("Choose the level of games");
-        int level = BjTools.getNumRange(1, 2);
+        int level = BjTools.getNumRange(1, 4);
 
         //According to the level of game, set a strategy for dealer
         BjStrategy strategy = StrategyFactory.strategyCreator(level);
@@ -59,16 +59,24 @@ public class BjCenter {
         //In second round, each gamer can decide whether to take more cards
         secondRound();
 
-        //Compare the final scores of each gamer, get the winner.
-        List<BjGamer> winners = getResult();
+        //Compare the final points of each gamer, get the winner.
+        List<BjGamer> winners = getWinner();
 
         //Print final results
+        for (BjGamer gamer: gamers) {
+            if (!gamer.isBurst()) {
+                gamer.printAllCards();
+            }
+        }
+
+        System.out.println();
         for (BjGamer winner : winners) {
-            System.out.printf("%s wins! Final score is %d \n", winner.name, winner.getScore());
+            System.out.printf("%s wins! Final Points is %d \n", winner.name, winner.getPoints());
         }
 
         System.out.println();
         System.out.println("The end!");
+
     }
 
     private void firstRound() {
@@ -78,7 +86,7 @@ public class BjCenter {
                 Card card = manager.deal();
                 gamer.addCard(card);
             }
-            gamer.printTwoCards();
+            gamer.printFirstTwoCards();
         }
         System.out.println();
     }
@@ -86,7 +94,6 @@ public class BjCenter {
     private void secondRound() {
         System.out.println("Second Round Begin! \r\n");
         for (BjGamer gamer : gamers) {
-            System.out.printf("%s's turn: \n", gamer.name);
             while (gamer.takeNext()) {
                 Card card = manager.deal();
                 gamer.addCard(card);
@@ -100,17 +107,17 @@ public class BjCenter {
         }
     }
 
-    private List<BjGamer> getResult() {
+    private List<BjGamer> getWinner() {
         int max = 0;
         List<BjGamer> winners = new ArrayList<>();
         for (BjGamer gamer : gamers) {
             if (!gamer.isBurst()) {
-                int score = gamer.getScore();
-                if (score > max) {
+                int Points = gamer.getPoints();
+                if (Points > max) {
                     winners.clear();
                     winners.add(gamer);
-                    max = score;
-                } else if (score == max) {
+                    max = Points;
+                } else if (Points == max) {
                     winners.add(gamer);
                 }
             }

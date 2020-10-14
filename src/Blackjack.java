@@ -4,6 +4,5 @@ public class Blackjack {
         BjCenter center = new BjCenter();
         center.iniGame();
         center.startGame();
-
     }
 }
