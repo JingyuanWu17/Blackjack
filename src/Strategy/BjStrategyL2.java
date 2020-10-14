@@ -6,16 +6,15 @@ import Tools.BjTools;
 
 /**
  * Level 2 strategy:
- * In level 1 strategy, when the dealer's points are less than 17,the deal
- * must take a card. Now we can set this number.
+ * Player now can set the upper bound for deal which forces
+ * dealer to take one more card.
  */
 public class BjStrategyL2 implements BjStrategy {
 
     private static int bound;
-    private final Random random;
+    private static final Random random = new Random();
 
     public BjStrategyL2() {
-        random = new Random();
         System.out.println("Set an upper bound for dealer");
         bound = BjTools.getNumRange(1, 21);
     }

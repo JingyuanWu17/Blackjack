@@ -1,21 +1,15 @@
 package Strategy;
 
-import BjCharacter.BjGamer;
-
 import java.util.Random;
 
 /**
  * Level 3 strategy:
- * Decide whether to take a card according to the points of current cards.
- * The higher the current points are, the lower the probability of taking one more card.
+ * Decide whether to take one more card according to the points of current cards.
+ * The higher the current points are, the lower the probability of taking cards.
  */
 public class BjStrategyL3 implements BjStrategy {
 
-    private final Random random;
-
-    public BjStrategyL3() {
-        random = new Random();
-    }
+    private final Random random = new Random();
 
     @Override
     public boolean takeNext(int points) {

@@ -1,14 +1,11 @@
 package Strategy;
 
-import BjCharacter.BjGamer;
-import Cards.Card;
-import Manager.CardManager;
-import Manager.PokerManager;
-
 import java.util.HashSet;
 import java.util.List;
-import java.util.Random;
 import java.util.Set;
+
+import Cards.Card;
+import Manager.PokerManager;
 
 /**
  * Level 4 strategy:
@@ -17,7 +14,8 @@ import java.util.Set;
  */
 public class BjStrategyL4 implements BjStrategy {
 
-    private final Random random;
+    //Small points: 2, 3, 4, 5, 6, 7
+    //Big points: 8, 9, 10, J, Q, K, A
     private static final Set<String> smallPoints = new HashSet<>();
     private static final BjStrategy strategyL3 = StrategyFactory.strategyCreator(3);
 
@@ -25,10 +23,6 @@ public class BjStrategyL4 implements BjStrategy {
         for (int i = 2; i <= 7; i++) {
             smallPoints.add(String.valueOf(i));
         }
-    }
-
-    public BjStrategyL4() {
-        random = new Random();
     }
 
     @Override

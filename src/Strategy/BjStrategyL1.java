@@ -2,15 +2,16 @@ package Strategy;
 
 import java.util.Random;
 
-//Level 1 strategy: Randomly decide whether to take one more card.(50%)
+/**
+ * Level 1 strategy:
+ * When the dealer's points are less than 17,the deal
+ * must take next card. Besides, the dealer randomly
+ * decides(50%) whether to take one more card.
+ */
 public class BjStrategyL1 implements BjStrategy {
 
     private static final int BOUND = 17;
-    private final Random random;
-
-    public BjStrategyL1() {
-        random = new Random();
-    }
+    private static final Random random = new Random();
 
     @Override
     public boolean takeNext(int points) {
