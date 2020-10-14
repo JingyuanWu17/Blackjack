@@ -10,21 +10,26 @@ public abstract class BjGamer {
 
     public String name;
 
-    protected final List<Card> handCards = new ArrayList<>();
-
-    //table[0]:points without ace value
+    //table[0]:points without ace
     //table[1]:numbers of ace
-    protected final int[] table = new int[2];
+    protected int[] table;
+    protected List<Card> handCards;
+
+    public BjGamer() {
+        handCards = new ArrayList<>();
+        table = new int[2];
+    }
 
     //Decide next move, take one more card or not
     public abstract boolean takeNext();
 
+    //Print first two cards after first round.
     public abstract void printFirstTwoCards();
 
     public void printAllCards() {
-        System.out.print(name + " has: ");
+        System.out.printf("%s has: ", name);
         for (Card card : handCards) {
-            System.out.print(card.getRank() + " ");
+            System.out.printf("%s ", card.getRank());
         }
         System.out.println();
     }
@@ -38,7 +43,7 @@ public abstract class BjGamer {
         return getPoints() > 21;
     }
 
-    //Calculate the sum of card points
+    //Calculate the sum of points of cards
     public int getPoints() {
         int val = table[0];
         int n = table[1];

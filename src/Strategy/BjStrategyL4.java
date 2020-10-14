@@ -10,7 +10,7 @@ import Manager.PokerManager;
 /**
  * Level 4 strategy:
  * According to the cards that have appeared，roughly judge whether the next card's point is big not not,
- * and then according to the current points, decide whether to take one more card.
+ * Then according to the current points, decide whether to take one more card.
  */
 public class BjStrategyL4 implements BjStrategy {
 

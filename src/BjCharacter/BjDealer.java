@@ -1,9 +1,9 @@
 package BjCharacter;
 
-import Cards.Card;
 import Strategy.BjStrategy;
 
 public class BjDealer extends BjGamer {
+
     private BjStrategy strategy;
 
     public BjDealer(BjStrategy strategy) {
@@ -18,6 +18,6 @@ public class BjDealer extends BjGamer {
 
     @Override
     public void printFirstTwoCards() {
-        System.out.println("Dealer has one hidden card and one " + handCards.get(1).getRank());
+        System.out.printf("Dealer has one hidden card and one %s.\r\n", handCards.get(1).getRank());
     }
 }

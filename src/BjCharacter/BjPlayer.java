@@ -9,8 +9,8 @@ public class BjPlayer extends BjGamer {
     }
 
     @Override
+    //Depends on real players
     public boolean takeNext() {
-        //Depends on the real players
         String str;
         while (true) {
             Scanner input = new Scanner(System.in);
@@ -29,6 +29,6 @@ public class BjPlayer extends BjGamer {
 
     @Override
     public void printFirstTwoCards() {
-        System.out.printf("%s has one %s and one %s \n", name, handCards.get(0).getRank(), handCards.get(1).getRank());
+        System.out.printf("%s has one %s and one %s.\r\n", name, handCards.get(0).getRank(), handCards.get(1).getRank());
     }
 }
