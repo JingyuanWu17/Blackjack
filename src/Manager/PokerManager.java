@@ -1,28 +1,22 @@
 package Manager;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.ArrayList;
 
 import Cards.Card;
 import Cards.PokerCard;
 
 public class PokerManager implements CardManager {
 
-    //Singleton Pattern
-    private PokerManager() {
-    }
+    private final int deck;
+    private final boolean withJoker;
+    private final List<Card> cardPool;
 
-    private static final PokerManager pm = new PokerManager();
-
-    private static int deck = 1;
-    private static boolean withJoker = false;
-    private static final List<Card> cardPool = new ArrayList<>();
-    //Record cards that have been dealt
-    private static final List<Card> cardLog = new ArrayList<>();
-
-    public static PokerManager getInstance() {
-        return pm;
+    public PokerManager(int n, boolean bool) {
+        deck = n;
+        withJoker = bool;
+        cardPool = new ArrayList<>();
     }
 
     //Initialize decks of playing cards.
@@ -51,24 +45,7 @@ public class PokerManager implements CardManager {
 
     @Override
     public Card deal() {
-        Card card = cardPool.remove(cardPool.size() - 1);
-        cardLog.add(card);
-        return card;
-    }
-
-    @Override
-    public void setDecks(int n) {
-        deck = n;
-    }
-
-    @Override
-    public void setJokers(boolean bool) {
-        withJoker = bool;
-    }
-
-    @Override
-    public List<Card> getCardLog() {
-        return cardLog;
+        return cardPool.remove(cardPool.size() - 1);
     }
 
 }
