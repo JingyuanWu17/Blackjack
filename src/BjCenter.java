@@ -1,5 +1,5 @@
-import java.util.ArrayList;
 import java.util.List;
+import java.util.ArrayList;
 
 import Cards.Card;
 import Tools.BjTools;
@@ -12,12 +12,15 @@ import Strategy.BjStrategy;
 import Strategy.StrategyFactory;
 
 
-//Game center, maintain the whole game logic
+//Game center: maintain the whole logic of game
 public class BjCenter {
 
+    //Manager: manage card behavior
     private CardManager manager;
 
-    //Gamers: including one dealer and several real players
+    private BjStrategy strategy;
+
+    //Gamers: several real players and one dealer
     private final List<BjGamer> gamers = new ArrayList<>();
 
     public void iniGame() {
@@ -26,8 +29,8 @@ public class BjCenter {
         System.out.println("Choose the level of games");
         int level = BjTools.getNumRange(1, 4);
 
-        //According to the level of game, choose a strategy
-        BjStrategy strategy = StrategyFactory.strategyCreator(level);
+        //According to the level of game, choose a corresponding strategy
+        strategy = StrategyFactory.strategyCreator(level);
 
         System.out.println("Choose the number of players");
         int playerNum = BjTools.getNumRange(1, 6);
@@ -35,18 +38,15 @@ public class BjCenter {
         System.out.println("How many decks of cards do you want to use?");
         int deck = BjTools.getNumRange(1, 4);
 
-        //Load players
+        manager = new PokerManager(deck, false);
+        manager.initCardPool();
+
+        //Load players and dealer
         for (int i = 0; i < playerNum; i++) {
             gamers.add(new BjPlayer("Player" + i));
         }
-
-        //Load dealer
         gamers.add(new BjDealer(strategy));
 
-        //Initialize cards
-        manager = PokerManager.getInstance();
-        manager.setDecks(deck);
-        manager.initCardPool();
     }
 
     public void startGame() {
@@ -82,6 +82,7 @@ public class BjCenter {
         for (BjGamer gamer : gamers) {
             for (int i = 0; i < 2; i++) {
                 Card card = manager.deal();
+                strategy.addCard(card);
                 gamer.addCard(card);
             }
             gamer.printFirstTwoCards();
@@ -94,10 +95,11 @@ public class BjCenter {
             System.out.println();
             while (gamer.takeNext()) {
                 Card card = manager.deal();
+                strategy.addCard(card);
                 gamer.addCard(card);
-                System.out.printf("%s got a %s.\r\n", gamer.name, card.getRank());
+                System.out.printf("%s got a %s.\r\n", gamer.getName(), card.getRank());
                 if (gamer.isBurst()) {
-                    System.out.printf("%s bust!\r\n", gamer.name);
+                    System.out.printf("%s bust!\r\n", gamer.getName());
                     break;
                 }
             }
@@ -110,7 +112,7 @@ public class BjCenter {
             if (!gamer.isBurst()) {
                 gamer.printAllCards();
             } else {
-                System.out.printf("%s burst!\r\n", gamer.name);
+                System.out.printf("%s burst!\r\n", gamer.getName());
             }
         }
     }
@@ -135,7 +137,7 @@ public class BjCenter {
             return;
         }
         for (BjGamer winner : winners) {
-            System.out.printf("%s wins! Final Points are %d.\r\n", winner.name, winner.getPoints());
+            System.out.printf("%s wins! Final Points are %d.\r\n", winner.getName(), winner.getPoints());
         }
     }
 

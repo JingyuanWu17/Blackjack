@@ -1,17 +1,21 @@
 package BjCharacter;
 
-import Cards.Card;
+import org.junit.Test;
+import static org.junit.Assert.*;
+
 import Cards.PokerCard;
 
+
 public class TestCharacter {
-//    public static void main(String[] args) {
-//        Card heartA = new PokerCard("H", "A");
-//        Card clubA = new PokerCard("C", "A");
-//        Card clubK = new PokerCard("C", "K");
-//        BjGamer gamer = new BjPlayer();
-//        gamer.addCard(heartA);
-//        gamer.addCard(clubA);
-//        gamer.addCard(clubK);
-//        System.out.println(gamer.getScore());
-//    }
+
+    @Test
+    public void test_updatePoints() {
+        BjGamer gamer = new BjPlayer("player");
+        gamer.addCard(new PokerCard("S", "A"));
+        gamer.addCard(new PokerCard("S", "K"));
+        gamer.addCard(new PokerCard("S", "8"));
+        int points = gamer.getPoints();
+        assertEquals(19, points);
+    }
+
 }

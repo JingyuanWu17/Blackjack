@@ -1,15 +1,11 @@
 package Strategy;
 
-import java.util.Random;
-
 /**
- * Level 3 strategy:
- * Decide whether to take one more card according to the points of current cards.
+ * Advance2 strategy:
+ * Decide whether to take more cards according to the points of current cards.
  * The higher the current points are, the lower the probability of taking cards.
  */
-public class BjStrategyL3 implements BjStrategy {
-
-    private final Random random = new Random();
+public class BjStrategyA2 extends BjStrategy {
 
     @Override
     public boolean takeNext(int points) {

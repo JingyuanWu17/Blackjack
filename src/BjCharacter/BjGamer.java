@@ -8,23 +8,66 @@ import Cards.Card;
 // Blackjack gamer
 public abstract class BjGamer {
 
-    public String name;
-
-    //table[0]:points without ace
-    //table[1]:numbers of ace
-    protected int[] table;
-    protected List<Card> handCards;
+    protected String name;
+    protected boolean hasAce;
+    protected int currPoints;
+    protected final List<Card> handCards;
 
     public BjGamer() {
         handCards = new ArrayList<>();
-        table = new int[2];
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
     }
 
     //Decide next move, take one more card or not
     public abstract boolean takeNext();
 
+    public void addCard(Card card) {
+        handCards.add(card);
+        updatePoints(card);
+    }
+
+    public boolean isBurst() {
+        return currPoints > 21;
+    }
+
+    public int getPoints() {
+        return currPoints;
+    }
+
+    protected void updatePoints(Card card) {
+        String rank = card.getRank();
+
+        if (rank.equals("J") || rank.equals("Q") || rank.equals("K")) {
+            currPoints += 10;
+        } else if (rank.equals("A")) {
+            currPoints += 11;
+            if (currPoints > 21) {
+                currPoints -= 10;
+            } else {
+                hasAce = true;
+            }
+        } else {
+            currPoints += Integer.parseInt(rank);
+        }
+
+        if (hasAce && currPoints > 21) {
+            currPoints -= 10;
+            hasAce = false;
+        }
+
+    }
+
     //Print first two cards after first round.
-    public abstract void printFirstTwoCards();
+    public void printFirstTwoCards() {
+        System.out.printf("%s has one %s and one %s.\r\n", name, handCards.get(0).getRank(), handCards.get(1).getRank());
+    }
 
     public void printAllCards() {
         System.out.printf("%s has: ", name);
@@ -32,46 +75,6 @@ public abstract class BjGamer {
             System.out.printf("%s ", card.getRank());
         }
         System.out.println();
-    }
-
-    public void addCard(Card card) {
-        handCards.add(card);
-        updateTable(card);
-    }
-
-    public boolean isBurst() {
-        return getPoints() > 21;
-    }
-
-    //Calculate the sum of points of cards
-    public int getPoints() {
-        int val = table[0];
-        int n = table[1];
-        while (n > 0) {
-            if (val + 11 + n - 1 <= 21) {
-                val += 11;
-            } else {
-                val += 1;
-            }
-            n--;
-        }
-        return val;
-    }
-
-    protected void updateTable(Card card) {
-        String rank = card.getRank();
-        switch (rank) {
-            case "J":
-            case "Q":
-            case "K":
-                table[0] += 10;
-                break;
-            case "A":
-                table[1]++;
-                break;
-            default:
-                table[0] += Integer.parseInt(rank);
-        }
     }
 
 }

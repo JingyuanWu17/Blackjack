@@ -1,10 +1,11 @@
 package BjCharacter;
 
+import Cards.Card;
 import Strategy.BjStrategy;
 
 public class BjDealer extends BjGamer {
 
-    private BjStrategy strategy;
+    private final BjStrategy strategy;
 
     public BjDealer(BjStrategy strategy) {
         name = "Dealer";
@@ -20,4 +21,5 @@ public class BjDealer extends BjGamer {
     public void printFirstTwoCards() {
         System.out.printf("Dealer has one hidden card and one %s.\r\n", handCards.get(1).getRank());
     }
+
 }

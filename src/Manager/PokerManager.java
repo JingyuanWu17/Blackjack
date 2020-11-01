@@ -1,25 +1,19 @@
 package Manager;
 
-import java.util.Collections;
-import java.util.List;
 import java.util.ArrayList;
-
-import Cards.Card;
 import Cards.PokerCard;
 
-public class PokerManager implements CardManager {
+public class PokerManager extends CardManager  {
 
     private final int deck;
     private final boolean withJoker;
-    private final List<Card> cardPool;
 
-    public PokerManager(int n, boolean bool) {
-        deck = n;
-        withJoker = bool;
+    public PokerManager(int deck, boolean withJoker) {
+        this.deck = deck;
+        this.withJoker = withJoker;
         cardPool = new ArrayList<>();
     }
 
-    //Initialize decks of playing cards.
     @Override
     public void initCardPool() {
         cardPool.clear();
@@ -37,15 +31,4 @@ public class PokerManager implements CardManager {
         }
         shuffle();
     }
-
-    @Override
-    public void shuffle() {
-        Collections.shuffle(cardPool);
-    }
-
-    @Override
-    public Card deal() {
-        return cardPool.remove(cardPool.size() - 1);
-    }
-
 }

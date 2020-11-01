@@ -27,8 +27,4 @@ public class BjPlayer extends BjGamer {
         return str.equals("y");
     }
 
-    @Override
-    public void printFirstTwoCards() {
-        System.out.printf("%s has one %s and one %s.\r\n", name, handCards.get(0).getRank(), handCards.get(1).getRank());
-    }
 }
