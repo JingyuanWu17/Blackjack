@@ -18,28 +18,23 @@ public class BjStrategyA3 extends BjStrategy {
     //Small points: 2, 3, 4, 5, 6, 7
     //Big points: 8, 9, 10, J, Q, K, A
     private static final Set<String> smallPoints;
-    private static BjStrategy strategyL3;
-    private final List<Card> cardLog;
+    private static final BjStrategy strategyL3;
+    private int count;
 
     static {
         smallPoints = new HashSet<>();
         for (int i = 2; i <= 7; i++) {
             smallPoints.add(String.valueOf(i));
         }
-    }
-
-    public BjStrategyA3() {
-        cardLog = new ArrayList<>();
         strategyL3 = StrategyFactory.strategyCreator(3);
     }
 
-
     @Override
     public boolean takeNext(int points) {
-        boolean big = nextCardBig();
-        if (points <= 13 && big) {
+        boolean nextBig = count > 0;
+        if (points <= 13 && nextBig) {
             return true;
-        } else if (points >= 17 && big) {
+        } else if (points >= 17 && nextBig) {
             return false;
         }
         return strategyL3.takeNext(points);
@@ -47,19 +42,12 @@ public class BjStrategyA3 extends BjStrategy {
 
     @Override
     public void addCard(Card card) {
-        cardLog.add(card);
-    }
-
-    private boolean nextCardBig() {
-        int val = 0;
-        for (Card card : cardLog) {
-            String rank = card.getRank();
-            if (smallPoints.contains(rank)) {
-                val--;
-            } else {
-                val++;
-            }
+        String rank = card.getRank();
+        //Update count
+        if (smallPoints.contains(rank)) {
+            count--;
+        } else {
+            count++;
         }
-        return val < 0;
     }
 }
