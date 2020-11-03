@@ -4,7 +4,8 @@ import java.util.Scanner;
 
 public class BjPlayer extends BjGamer {
 
-    public BjPlayer(String name) {
+    public BjPlayer(String name, int money) {
+        this.money = money;
         this.name = name;
     }
 

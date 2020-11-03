@@ -32,7 +32,7 @@ public class BjStrategyA3 extends BjStrategy {
     @Override
     public boolean takeNext(int points) {
         boolean nextBig = count > 0;
-        if (points <= 13 && nextBig) {
+        if (points <= 12 && nextBig) {
             return true;
         } else if (points >= 17 && nextBig) {
             return false;
