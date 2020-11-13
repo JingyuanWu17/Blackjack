@@ -10,7 +10,7 @@ public class TestCharacter {
 
     @Test
     public void test_updatePoints() {
-        BjGamer gamer = new BjPlayer("player");
+        BjGamer gamer = new BjPlayer("player", 100);
         gamer.addCard(new PokerCard("S", "A"));
         gamer.addCard(new PokerCard("S", "K"));
         gamer.addCard(new PokerCard("S", "8"));

@@ -9,9 +9,9 @@ import Cards.Card;
 public abstract class BjGamer {
 
     protected String name;
-    //1: Blackjack, -1: Burst
-    protected int status;
-    protected int money;
+    protected boolean burst;
+    protected boolean blackjack;
+    protected double money;
     protected final List<Card> handCards;
     protected boolean hasAce;
     protected int currPoints;
@@ -25,7 +25,23 @@ public abstract class BjGamer {
         return name;
     }
 
-    //Decide next move, take one more card or not
+    public int getPoints() {
+        return currPoints;
+    }
+
+    public boolean isBurst() {
+        return burst;
+    }
+
+    public boolean isBlackjack() {
+        return blackjack;
+    }
+
+    public double getMoney() {
+        return money;
+    }
+
+    //Decide next move, take more cards or not
     public abstract boolean takeNext();
 
     public void addCard(Card card) {
@@ -34,28 +50,12 @@ public abstract class BjGamer {
         updateStatus();
     }
 
-    public int getPoints() {
-        return currPoints;
+    public void bet(double m) {
+        money -= m;
     }
 
-    public int getStatus() {
-        return status;
-    }
-
-    public boolean bet(int m) {
-        if (m <= money) {
-            money -= m;
-            return true;
-        }
-        return false;
-    }
-
-    public void winMoney(int m) {
+    public void winMoney(double m) {
         money += m;
-    }
-
-    public int getMoney() {
-        return money;
     }
 
     protected void updatePoints(Card card) {
@@ -81,11 +81,9 @@ public abstract class BjGamer {
 
     protected void updateStatus() {
         if (currPoints > 21) {
-            status = -1;
+            burst = true;
         } else if (currPoints == 21 && handCards.size() == 2) {
-            status = 1;
-        } else {
-            status = 0;
+            blackjack = true;
         }
     }
 
@@ -102,6 +100,14 @@ public abstract class BjGamer {
         System.out.println();
     }
 
+    public void statusReset() {
+        burst = false;
+        blackjack = false;
+        handCards.clear();
+        hasAce = false;
+        currPoints = 0;
+    }
+
     @Override
     public int hashCode() {
         return name.hashCode();
@@ -109,7 +115,7 @@ public abstract class BjGamer {
 
     @Override
     public boolean equals(Object obj) {
-        BjGamer gamer_obj = (BjGamer)obj;
+        BjGamer gamer_obj = (BjGamer) obj;
         return this.getName().equals(gamer_obj.getName());
     }
 }

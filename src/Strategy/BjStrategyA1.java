@@ -10,7 +10,7 @@ public class BjStrategyA1 extends BjStrategy {
 
     public BjStrategyA1() {
         System.out.println("Set an upper bound for dealer");
-        bound = BjTools.getNumRange(1, 21);
+        bound = BjTools.getInt(1, 21);
     }
 }
 
