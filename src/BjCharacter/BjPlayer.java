@@ -10,22 +10,21 @@ public class BjPlayer extends BjGamer {
     }
 
     @Override
-    //Depends on real players
     public boolean takeNext() {
         String str;
         while (true) {
             Scanner input = new Scanner(System.in);
-            System.out.printf("%s takes one more card?[y/n]: ", name);
+            System.out.printf("%s Hit or Stand?[h/s]: ", name);
             if (input.hasNext()) {
                 str = input.next();
-                if (str.equals("y") || str.equals("n")) {
+                if (str.equals("h") || str.equals("s")) {
                     break;
                 } else {
-                    System.out.println("Please enter y or n");
+                    System.out.println("Please enter h or s.");
                 }
             }
         }
-        return str.equals("y");
+        return str.equals("h");
     }
 
 }

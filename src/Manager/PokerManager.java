@@ -1,9 +1,10 @@
 package Manager;
 
 import java.util.ArrayList;
+
 import Cards.PokerCard;
 
-public class PokerManager extends CardManager  {
+public class PokerManager extends CardManager {
 
     private final int deck;
     private final boolean withJoker;

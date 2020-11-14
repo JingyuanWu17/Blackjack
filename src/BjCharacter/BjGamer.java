@@ -9,12 +9,12 @@ import Cards.Card;
 public abstract class BjGamer {
 
     protected String name;
-    protected boolean burst;
+    protected boolean bust;
     protected boolean blackjack;
     protected double money;
-    protected final List<Card> handCards;
     protected boolean hasAce;
     protected int currPoints;
+    protected final List<Card> handCards;
 
 
     public BjGamer() {
@@ -29,8 +29,8 @@ public abstract class BjGamer {
         return currPoints;
     }
 
-    public boolean isBurst() {
-        return burst;
+    public boolean isBust() {
+        return bust;
     }
 
     public boolean isBlackjack() {
@@ -43,6 +43,17 @@ public abstract class BjGamer {
 
     //Decide next move, take more cards or not
     public abstract boolean takeNext();
+
+    @Override
+    public int hashCode() {
+        return name.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        BjGamer gamer_obj = (BjGamer) obj;
+        return this.getName().equals(gamer_obj.getName());
+    }
 
     public void addCard(Card card) {
         handCards.add(card);
@@ -81,7 +92,7 @@ public abstract class BjGamer {
 
     protected void updateStatus() {
         if (currPoints > 21) {
-            burst = true;
+            bust = true;
         } else if (currPoints == 21 && handCards.size() == 2) {
             blackjack = true;
         }
@@ -89,11 +100,11 @@ public abstract class BjGamer {
 
     //Print first two cards after first round.
     public void printFirstTwoCards() {
-        System.out.printf("%s has one %s and one %s.\r\n", name, handCards.get(0).getRank(), handCards.get(1).getRank());
+        System.out.printf("%s got one %s and one %s.\r\n", name, handCards.get(0).getRank(), handCards.get(1).getRank());
     }
 
     public void printAllCards() {
-        System.out.printf("%s has: ", name);
+        System.out.printf("%s got ", name);
         for (Card card : handCards) {
             System.out.printf("%s ", card.getRank());
         }
@@ -101,21 +112,11 @@ public abstract class BjGamer {
     }
 
     public void statusReset() {
-        burst = false;
+        bust = false;
         blackjack = false;
         handCards.clear();
         hasAce = false;
         currPoints = 0;
     }
 
-    @Override
-    public int hashCode() {
-        return name.hashCode();
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        BjGamer gamer_obj = (BjGamer) obj;
-        return this.getName().equals(gamer_obj.getName());
-    }
 }

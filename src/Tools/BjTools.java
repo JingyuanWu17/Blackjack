@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class BjTools {
 
-    //Get an integer in a specific range from console
+    //Get an integer within a specific range from console
     public static int getInt(int left, int right) {
         int n;
         while (true) {
@@ -24,7 +24,8 @@ public class BjTools {
         System.out.println();
         return n;
     }
-    //Get a double in a specific range from console
+
+    //Get a double within a specific range from console
     public static double getDouble(double left, double right) {
         double n;
         while (true) {
