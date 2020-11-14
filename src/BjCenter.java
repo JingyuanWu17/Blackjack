@@ -1,7 +1,4 @@
-import java.util.Map;
-import java.util.HashMap;
-import java.util.List;
-import java.util.ArrayList;
+import java.util.*;
 
 import Cards.Card;
 import Tools.BjTools;
@@ -24,20 +21,27 @@ public class BjCenter {
     private BjStrategy strategy;
 
     //Gamers: several real players and one dealer
-    private final List<BjGamer> gamers = new ArrayList<>();
+    private final List<BjGamer> gamers;
 
     //Record players' bets
-    private Map<BjGamer, Double> betMap;
+    private final Map<BjGamer, Double> betMap;
 
     //Record players who have run out of their bets
-    private List<Integer> outPlayer;
+    private final List<Integer> outPlayer;
 
     private boolean allPlayersOut;
 
     private boolean dealerBlackjack;
 
-    public void iniGame() {
+    public BjCenter() {
+        gamers = new LinkedList<>();
+        betMap = new HashMap<>();
+        outPlayer = new ArrayList<>();
+        allPlayersOut = false;
+        dealerBlackjack = false;
+    }
 
+    public void iniGame() {
         System.out.println("RULES:\r\n" +
                 "Every player has 500 bets at beginning.\r\n" +
                 "Each time the minimum bet is 100.\r\n" +
@@ -59,9 +63,6 @@ public class BjCenter {
 
         manager = new PokerManager(deck, false);
         manager.initCardPool();
-
-        betMap = new HashMap<>();
-        outPlayer = new ArrayList<>();
 
         //Load players and dealer
         for (int i = 0; i < playerNum; i++) {
@@ -195,7 +196,7 @@ public class BjCenter {
                     outPlayer.add(i);
                 }
             } else if (player.getPoints() == dealerPoints) {
-                //Players tied
+                //Players and dealer tied
                 System.out.printf("%s tied.\r\n", name);
                 player.winMoney(betMoney);
             } else {
