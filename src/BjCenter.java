@@ -40,8 +40,9 @@ public class BjCenter {
 
         System.out.println("RULES:\r\n" +
                 "Every player has 500 bets at beginning.\r\n" +
-                "Minimum bet per game is 100.\r\n" +
-                "Those who run out of bets are out.\r\n");
+                "Each time the minimum bet is 100.\r\n" +
+                "Those who run out of bets are out.\r\n" +
+                "When all players are out, the game is over.\r\n");
 
         //Set the difficulty of game
         System.out.println("Choose the level of game");
